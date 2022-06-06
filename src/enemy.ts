@@ -8,14 +8,11 @@ export class Enemy extends PIXI.Sprite {
         this.scale.y = 0.3;
         this.x = x;
         this.y = y;
-    }
-
-    init() {
-
-    }
-
-    renderPlayer() {
         
+    }
+
+    chasePlayer() {
+
     }
 }
 

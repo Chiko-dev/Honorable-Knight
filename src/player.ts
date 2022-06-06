@@ -2,7 +2,6 @@ import * as PIXI from 'pixi.js'
 
 let keys:any = {};
 
-
 export class Player extends PIXI.Sprite {
     constructor(x:number, y:number, texture:any) {
         super(texture);
@@ -12,7 +11,7 @@ export class Player extends PIXI.Sprite {
         this.x = x;
         this.y = y;
     }
-
+    
     keyEvents() {
         window.addEventListener("keydown", this.keyDown)
         window.addEventListener("keyup", this.keyUp)

@@ -29,7 +29,6 @@ function doneLoading() {
     createPlayer();
     createEnemy();
 
-    
     app.ticker.add(gameLoop);
 }
 

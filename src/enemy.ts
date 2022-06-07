@@ -1,4 +1,6 @@
 import * as PIXI from 'pixi.js'
+import {Player} from "./player"
+import { collision }  from "./index"
 
 export class Enemy extends PIXI.Sprite {
     constructor(x:number, y:number, texture:any) {
@@ -8,11 +10,24 @@ export class Enemy extends PIXI.Sprite {
         this.scale.y = 0.3;
         this.x = x;
         this.y = y;
-        
     }
 
-    chasePlayer() {
+    chasePlayer(player: Player) {
+        if (collision(player, this) != true) {
+            if (player.getX() > this.x) {
+                this.x++;
+            }
+            if (player.getX() < this.x) {
+                this.x--;
+            }
+            if (player.getY() > this.y) {
+                this.y++;
+            }
 
+            if (player.getY() < this.y) {
+                this.y--;
+            } 
+        }
     }
 }
 

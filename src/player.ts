@@ -11,6 +11,14 @@ export class Player extends PIXI.Sprite {
         this.x = x;
         this.y = y;
     }
+
+    getX() {
+        return this.x;
+    }
+    
+    getY() {
+        return this.y;
+    }
     
     keyEvents() {
         window.addEventListener("keydown", this.keyDown)

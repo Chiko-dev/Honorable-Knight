@@ -2,16 +2,21 @@ import * as PIXI from 'pixi.js'
 import {Player} from './player'
 import {Enemy} from './enemy'
 
-let sceneX = 800;
-let sceneY = 600;
+let appDimensions = {
+    width: 1600,
+    height: 900
+}
+
+export default appDimensions;
+
 let app:any;
 let player:any;
 let enemy:any;
 
 window.onload = function () {
     app = new PIXI.Application({
-        width: sceneX,
-        height: sceneY,
+        width: appDimensions.width,
+        height: appDimensions.height,
         backgroundColor: 0xAAAAAA
     });
 
@@ -34,12 +39,10 @@ function doneLoading() {
 
 function gameLoop() {
     player.keyEvents();
-    player.walk();
+    player.walk(enemy);
     enemy.chasePlayer(player);
 
-    if (collision(player, enemy) == true) {
-        console.log(1);
-    }
+    collision(player, enemy);
 }
 
 function createPlayer() {

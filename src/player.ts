@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import appDimensions from './index'
 
 let keys:any = {};
 
@@ -34,30 +35,30 @@ export class Player extends PIXI.Sprite {
     }
 
     walk() {
-        //left
-        if (keys["37"]) {
-            if (this.x >= 25) {
+        let boundries = this.getBounds();
+        
+        if (keys["37"]) { //left
+            if (boundries.x >= 0) {
                 this.x -= 5;
             }
         }
-        //up
-        if (keys["38"]) {
-            if (this.y >= 25){
+        
+        if (keys["38"]) { //up
+            if (boundries.y >= 0){
                 this.y -= 5;
             }
         }
-        //right
-        if (keys["39"]) {
-            if (this.x <= (800 - 25 )){
+        
+        if (keys["39"]) { //right
+            if (boundries.x <= appDimensions.width - boundries.width ){
                 this.x += 5;
             }
         }
-        //down
-        if (keys["40"]) {
-            if (this.y <= (600 - 25 )){
+        
+        if (keys["40"]) { //down
+            if (boundries.y <= appDimensions.height - boundries.height ){
                 this.y += 5;
             }
         }
     }
 }
-

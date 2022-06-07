@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import {Player} from "./player"
+import { Player } from "./player"
 import { collision }  from "./index"
 
 export class Enemy extends PIXI.Sprite {
@@ -10,6 +10,14 @@ export class Enemy extends PIXI.Sprite {
         this.scale.y = 0.3;
         this.x = x;
         this.y = y;
+    }
+
+    getX() {
+        return this.x;
+    }
+    
+    getY() {
+        return this.y;
     }
 
     chasePlayer(player: Player) {
@@ -30,4 +38,3 @@ export class Enemy extends PIXI.Sprite {
         }
     }
 }
-

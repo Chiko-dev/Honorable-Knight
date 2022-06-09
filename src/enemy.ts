@@ -1,6 +1,8 @@
 import * as PIXI from 'pixi.js'
 import { Player } from "./player"
 import { collision }  from "./index"
+import { SCALE } from "./index"
+
 
 export class Enemy extends PIXI.Sprite {
     constructor(x:number, y:number, texture:any) {

@@ -1,16 +1,23 @@
 import * as PIXI from 'pixi.js'
 import appDimensions from './index'
+import { tileSize } from "./index"
+import { testCollision } from "./index"
+import { SCALE } from "./index"
 
 let keys:any = {};
 
 export class Player extends PIXI.Sprite {
-    constructor(x:number, y:number, texture:any) {
+    vx: number;
+    vy: number;
+    constructor(x:number, y:number, texture:any, vy:number, vx:number) {
         super(texture);
         this.anchor.set(0.5)
-        this.scale.x = 0.3;
-        this.scale.y = 0.3;
+        this.scale.x = SCALE;
+        this.scale.y = SCALE;
         this.x = x;
         this.y = y;
+        this.vx = vx;
+        this.vy = vy;
     }
 
     getX() {
@@ -60,5 +67,25 @@ export class Player extends PIXI.Sprite {
                 this.y += 5;
             }
         }
+    }
+
+    playerGravity() {
+        this.vy = this.vy + 1;
+        this.x += this.vx;
+
+        if (this.vy > 0) {
+            for (let i = 0; i < this.vy; i++) {
+                let testX1 = this.x / tileSize;
+                let testX2 = this.x / tileSize - 1 ;
+                let testY = this.y + tileSize * 2 ;
+
+                if (testCollision(testX1, testY) || testCollision(testX2, testY)){
+                    this.vy = 0;
+                    break;
+                }
+
+                this.y = this.y + 1;
+            }
+        } 
     }
 }

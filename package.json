@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "nodemon": "^2.0.16",
-    "pixi.js": "^6.2.0"
+    "pixi.js": "^6.4.2"
   }
 }

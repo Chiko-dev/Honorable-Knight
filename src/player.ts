@@ -10,7 +10,7 @@ export class Player extends PIXI.Sprite {
     vx: number;
     vy: number;
     touchingGround: any;
-    singleJump:boolean;
+    singleJump:any;
     constructor(x:number, y:number, texture:any, vy:number, vx:number) {
         super(texture);
         this.anchor.set(0.5)
@@ -20,11 +20,7 @@ export class Player extends PIXI.Sprite {
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.touchingGround = testCollision(
-            this.x,
-            this.y + tileSize * 2 + 1
-        )
-        this.singleJump == false;
+        this.singleJump = false;
     }
 
     getX() {
@@ -50,35 +46,34 @@ export class Player extends PIXI.Sprite {
 
     walk() {
         let boundries = this.getBounds();
-
+        this.touchingGround = testCollision(
+            this.x,
+            this.y + tileSize * SCALE + 1
+        ) || testCollision (
+            this.x + tileSize * SCALE - 1,
+            this.y + tileSize * SCALE + 1
+        )
         
         if (keys["37"]) { //left
             if (boundries.x >= 0) {
                 this.x -= 5;
             }
-        }
+        }        
 
-        if (keys["38"]) { //up
+        if (keys["38"]) { //up\
             if (boundries.y >= 0) {
-                this.singleJump = true;
-                this.vy = -10;
+                if (this.singleJump == false){
+                    this.vy = -16;
+                    this.singleJump = true;
+                }
             }
+        } else if (keys["38"] == false && this.touchingGround) {
+            this.singleJump = false;
         }
 
-        
-        
-        
         if (keys["39"]) { //right
             if (boundries.x <= appDimensions.width - boundries.width ){
                 this.x += 5;
-            }
-        }
-
-        if (this.touchingGround){
-            if (keys["40"]) { //down
-                if (boundries.y <= appDimensions.height - boundries.height ){
-                    this.y += 5;
-                }
             }
         }
     }
@@ -89,6 +84,7 @@ export class Player extends PIXI.Sprite {
 
         if (this.vy > 0) {
             for (let i = 0; i < this.vy; i++) {
+
                 let testX1 = this.x / tileSize;
                 let testX2 = this.x / tileSize - 1;
                 let testY = this.y + tileSize * 2;
@@ -111,6 +107,3 @@ export class Player extends PIXI.Sprite {
     }
 }
 
-function e(e: any): any {
-    throw new Error('Function not implemented.')
-}

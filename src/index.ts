@@ -6,7 +6,7 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
 let appDimensions = {
     width: 1550,
-    height: 850
+    height: 860
 }
 
 export default appDimensions;
@@ -29,7 +29,7 @@ export let map = {
         61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61,
         61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61,
         61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61,
-        61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61,
+        61, 1, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
     ],
@@ -41,7 +41,7 @@ export let map = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     ]
@@ -75,9 +75,9 @@ function doneLoading() {
 }
 
 function gameLoop() {
+    player.playerGravity();
     player.keyEvents();
     player.walk(enemy);
-    player.playerGravity();
     enemy.chasePlayer(player);
 
     collision(player, enemy);
@@ -135,7 +135,8 @@ export function collision(a:any, b:any) {
 }
 
 export function testCollision(worldX:number, worldY:number) { 
-    let mapX = Math.floor(worldX / tileSize / SCALE);// 0
-    let mapY = Math.floor(worldY / tileSize / SCALE);// 8
+    let mapX = Math.floor(worldX / tileSize / SCALE);
+    let mapY = Math.floor(worldY / tileSize / SCALE);
+    
     return map.collision[mapY * map.width + mapX];
 }

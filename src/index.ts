@@ -135,7 +135,7 @@ export function collision(a:any, b:any) {
 }
 
 export function testCollision(worldX:number, worldY:number) { 
-    let mapX = Math.floor(worldX / tileSize / SCALE);
-    let mapY = Math.floor(worldY / tileSize / SCALE);
+    let mapX = Math.floor(worldX / tileSize / SCALE);// 0
+    let mapY = Math.floor(worldY / tileSize / SCALE);// 8
     return map.collision[mapY * map.width + mapX];
 }
